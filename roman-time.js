@@ -20,25 +20,26 @@ function romanTime(time) {
                 result += roman[i];
                 number -= arab[i];
                 i = 6;
-            } else {
-                i--;
             }
+            i--;
         }
 
         return result;
     }
 
     let strArr = time.split(':').slice(0, 2);
-    let parseArr = strArr.map(function(item) {
+    if (strArr.length > 2) {
+        throw new TypeError('Введены неверные данные');
+    }
+    let parseArr = strArr.map(function (item) {
         if ((strArr[0] >= 0 && strArr[0] <= 23) && (strArr[1] >= 0 && strArr[1] <= 59)) {
             return parseInt(item);
-        } else {
-            throw new TypeError('Введены неверные данные');
         }
+        throw new TypeError('Введены неверные данные');
     });
 
-    let result = parseArr.map(function(item) {
-        if (item == 0) {
+    let result = parseArr.map(function (item) {
+        if (item === 0) {
             return 'N';
         }
 
