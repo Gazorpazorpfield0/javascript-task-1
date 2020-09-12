@@ -6,7 +6,7 @@
  */
 function romanTime(time) {
 
-    if (typeof(time) !== 'string') {
+    if (typeof time !== 'string') {
         throw new TypeError('Введены неверные данные');
     }
 
@@ -27,10 +27,16 @@ function romanTime(time) {
         return result;
     }
 
-    let strArr = time.split(':').slice(0, 2);
-    if (strArr.length > 2) {
+    let strArr = time.split(':');
+    if (strArr.length !== 2) {
         throw new TypeError('Введены неверные данные');
     }
+    strArr.forEach(item => {
+        if (item.length > 2) {
+            throw new TypeError('Введены неверные данные');
+        }
+    });
+
     let parseArr = strArr.map(function (item) {
         if ((strArr[0] >= 0 && strArr[0] <= 23) && (strArr[1] >= 0 && strArr[1] <= 59)) {
             return parseInt(item);
